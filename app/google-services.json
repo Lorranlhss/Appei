@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "111604754233",
+    "project_id": "app-ei-5bd62",
+    "storage_bucket": "app-ei-5bd62.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:111604754233:android:1b2d8ae8a3197e8ad36ae8",
+        "android_client_info": {
+          "package_name": "com.biomaamazonia.appei"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSc5a00gvNQpHTp-VPscumPDUSLmHgG5g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
