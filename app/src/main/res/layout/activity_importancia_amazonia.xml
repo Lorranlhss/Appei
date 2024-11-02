@@ -1,0 +1,43 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A Importância da Amazônia"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A Amazônia desempenha um papel vital no equilíbrio climático global, no ciclo de chuvas, e na preservação da biodiversidade. Ela é responsável por aproximadamente 20% do oxigênio da Terra, atua como regulador do clima e abriga milhões de espécies de fauna e flora."
+            android:textSize="16sp"
+            android:paddingBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A floresta também influencia as chuvas em outras partes do continente, sendo essencial para a agricultura e para o fornecimento de água potável. Sua biodiversidade é uma fonte de conhecimento e descoberta científica, especialmente na área de plantas medicinais."
+            android:textSize="16sp"
+            android:paddingBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preservar a Amazônia é crucial para combater as mudanças climáticas e garantir a qualidade de vida das gerações futuras."
+            android:textSize="16sp"
+            android:paddingBottom="8dp"/>
+
+    </LinearLayout>
+</ScrollView>

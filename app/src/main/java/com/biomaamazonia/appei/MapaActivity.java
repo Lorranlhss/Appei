@@ -1,10 +1,10 @@
 package com.biomaamazonia.appei;
 
-import androidx.fragment.app.FragmentActivity;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;

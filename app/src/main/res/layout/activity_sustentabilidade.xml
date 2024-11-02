@@ -1,0 +1,43 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sustentabilidade"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Práticas sustentáveis são essenciais para preservar a Amazônia e proteger o meio ambiente. Aqui estão algumas sugestões de ações que cada um de nós pode adotar para contribuir com essa missão:"
+            android:textSize="16sp"
+            android:paddingBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="• Reduza o consumo de plástico e outros materiais descartáveis.\n• Apoie empresas que promovam a sustentabilidade e a preservação da Amazônia.\n• Participe de campanhas e apoie ONGs voltadas para a proteção ambiental.\n• Conscientize amigos e familiares sobre a importância de proteger a floresta."
+            android:textSize="16sp"
+            android:paddingBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ao adotar práticas sustentáveis, ajudamos a preservar a biodiversidade e os recursos naturais da Amazônia para as futuras gerações."
+            android:textSize="16sp"
+            android:paddingBottom="8dp"/>
+
+    </LinearLayout>
+</ScrollView>

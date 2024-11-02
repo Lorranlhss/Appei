@@ -1,0 +1,50 @@
+<!-- nav_header.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="?attr/colorPrimaryDark">
+
+    <TextView
+        android:id="@+id/welcomeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bem-vindo, [Nome do Usuário]"
+        android:textSize="18sp"
+        android:textColor="@android:color/white" />
+
+    <!-- Botões de navegação do menu deslizante -->
+    <Button
+        android:id="@+id/buttonImportanciaAmazonia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Importância da Amazônia"
+        android:layout_marginTop="8dp"/>
+    <Button
+        android:id="@+id/buttonSustentabilidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sustentabilidade"
+        android:layout_marginTop="8dp"/>
+    <Button
+        android:id="@+id/buttonMapa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mapa Interativo"
+        android:layout_marginTop="8dp"/>
+    <Button
+        android:id="@+id/buttonQuiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quiz Educativo"
+        android:layout_marginTop="8dp"/>
+    <Button
+        android:id="@+id/buttonFaunaFlora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fauna e Flora"
+        android:layout_marginTop="8dp"/>
+
+</LinearLayout>
