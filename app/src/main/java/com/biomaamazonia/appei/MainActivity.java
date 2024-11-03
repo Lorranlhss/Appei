@@ -17,6 +17,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
@@ -47,28 +48,19 @@ public class MainActivity extends AppCompatActivity {
         // Configurar saudação e versão
         View headerView = navigationView.getHeaderView(0);
         TextView welcomeText = headerView.findViewById(R.id.welcomeText);
-        welcomeText.setText("Bem-vindo, [Nome do Usuário]");// precisa adicionar o nome do Usuário pelo fire base
+        String userName = "[Nome do Usuário]"; // inserir nome de usuario armazenado no banco de dados
+        welcomeText.setText(getString(R.string.welcome_message, userName));
 
         // Definir ações dos botões
-        headerView.findViewById(R.id.buttonMapa).setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, MapaActivity.class));
-        });
+        headerView.findViewById(R.id.buttonMapa).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MapaActivity.class)));
 
-        headerView.findViewById(R.id.buttonFaunaFlora).setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, FaunaFloraActivity.class));
-        });
+        headerView.findViewById(R.id.buttonFaunaFlora).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, FaunaFloraActivity.class)));
 
-        headerView.findViewById(R.id.buttonQuiz).setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, QuizActivity.class));
-        });
+        headerView.findViewById(R.id.buttonQuiz).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, QuizActivity.class)));
 
-        headerView.findViewById(R.id.buttonImportanciaAmazonia).setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, ImportanciaAmazoniaActivity.class));
-        });
+        headerView.findViewById(R.id.buttonImportanciaAmazonia).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ImportanciaAmazoniaActivity.class)));
 
-        headerView.findViewById(R.id.buttonSustentabilidade).setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, SustentabilidadeActivity.class));
-        });
+        headerView.findViewById(R.id.buttonSustentabilidade).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SustentabilidadeActivity.class)));
 
         // Botão de logout
         navigationView.getMenu().findItem(R.id.nav_logout).setOnMenuItemClickListener(item -> {

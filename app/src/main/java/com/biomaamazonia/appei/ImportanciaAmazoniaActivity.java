@@ -10,5 +10,7 @@ public class ImportanciaAmazoniaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_importancia_amazonia);
     }
+
+
 }
 
