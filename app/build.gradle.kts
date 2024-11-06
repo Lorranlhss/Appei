@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.biomaamazonia.appei"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -26,6 +26,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -33,7 +34,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -41,9 +41,10 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation("com.google.android.gms:play-services-maps:19.0.0")
-    implementation ("com.google.firebase:firebase-database:20.0.5")
-    implementation ("com.google.firebase:firebase-auth:21.0.3")
-
-
+    implementation(libs.play.services.maps)
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.auth)
+    implementation ("com.google.android.material:material:1.9.0")
 }

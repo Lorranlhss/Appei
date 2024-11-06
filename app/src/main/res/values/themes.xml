@@ -3,6 +3,9 @@
     <style name="Base.Theme.Appei" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <!-- Define a cor da barra de status -->
+        <item name="android:statusBarColor">#2A5D34</item>
     </style>
 
     <style name="Theme.Appei" parent="Base.Theme.Appei" />

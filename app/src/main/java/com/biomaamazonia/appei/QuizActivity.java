@@ -1,35 +1,35 @@
-
 package com.biomaamazonia.appei;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class QuizActivity extends AppCompatActivity {
 
-    private DatabaseReference mDatabase;
-    private TextView perguntaTextView;
-    private RadioGroup opcoesRadioGroup;
-    private Button proximaPerguntaButton;
+    // Somente declare as variáveis aqui
+    DatabaseReference mDatabase;
+    TextView perguntaTextView;
+    RadioGroup opcoesRadioGroup;
+    Button proximaPerguntaButton;
 
-    private ArrayList<String> perguntas = new ArrayList<>();
-    private ArrayList<String[]> opcoes = new ArrayList<>();
-    private ArrayList<String> respostasCorretas = new ArrayList<>();
+    private final ArrayList<String> perguntas = new ArrayList<>();
+    private final ArrayList<String[]> opcoes = new ArrayList<>();
+    private final ArrayList<String> respostasCorretas = new ArrayList<>();
 
     private int perguntaAtual = 0;
 
@@ -38,7 +38,7 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        // Inicializando as views
+        // Inicialize as views dentro do onCreate
         perguntaTextView = findViewById(R.id.perguntaTextView);
         opcoesRadioGroup = findViewById(R.id.opcoesRadioGroup);
         proximaPerguntaButton = findViewById(R.id.proximaPerguntaButton);
@@ -49,7 +49,7 @@ public class QuizActivity extends AppCompatActivity {
         // Carregar as perguntas do Firebase
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 perguntas.clear();
                 opcoes.clear();
                 respostasCorretas.clear();
@@ -59,7 +59,10 @@ public class QuizActivity extends AppCompatActivity {
                     perguntas.add(snapshot.child("pergunta").getValue(String.class));
 
                     // Adicionar as opções como ArrayList
-                    ArrayList<String> opcoesList = (ArrayList<String>) snapshot.child("opcoes").getValue();
+                    ArrayList<String> opcoesList = snapshot.child("opcoes").getValue(new GenericTypeIndicator<>() {});
+                    if (opcoesList == null) {
+                        opcoesList = new ArrayList<>(); // Inicializa como uma lista vazia se for null
+                    }
                     String[] opcoesArray = new String[opcoesList.size()];
                     opcoesArray = opcoesList.toArray(opcoesArray);
                     opcoes.add(opcoesArray);
@@ -72,30 +75,27 @@ public class QuizActivity extends AppCompatActivity {
                 exibirPergunta();
             }
 
-
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(QuizActivity.this, "Erro ao carregar quiz.", Toast.LENGTH_SHORT).show();
             }
         });
 
         // Avançar para a próxima pergunta ao clicar no botão
-        proximaPerguntaButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                verificarResposta();
-                perguntaAtual++;
-                if (perguntaAtual < perguntas.size()) {
-                    exibirPergunta();
-                } else {
-                    Toast.makeText(QuizActivity.this, "Fim do quiz!", Toast.LENGTH_SHORT).show();
-                    // Aqui você pode reiniciar o quiz ou mostrar os resultados
-                    perguntaAtual = 0;
-                    exibirPergunta();
-                }
+        proximaPerguntaButton.setOnClickListener(v -> {
+            verificarResposta();
+            perguntaAtual++;
+            if (perguntaAtual < perguntas.size()) {
+                exibirPergunta();
+            } else {
+                Toast.makeText(QuizActivity.this, "Fim do quiz!", Toast.LENGTH_SHORT).show();
+                // Aqui você pode reiniciar o quiz ou mostrar os resultados
+                perguntaAtual = 0;
+                exibirPergunta();
             }
         });
     }
+
 
     // Exibe a pergunta atual no layout
     private void exibirPergunta() {
