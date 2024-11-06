@@ -12,11 +12,14 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Arrays;
+import java.util.List;
 
+public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -53,13 +56,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Definir ações dos botões
         headerView.findViewById(R.id.buttonMapa).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MapaActivity.class)));
-
         headerView.findViewById(R.id.buttonFaunaFlora).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, FaunaFloraActivity.class)));
-
         headerView.findViewById(R.id.buttonQuiz).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, QuizActivity.class)));
-
         headerView.findViewById(R.id.buttonImportanciaAmazonia).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ImportanciaAmazoniaActivity.class)));
-
         headerView.findViewById(R.id.buttonSustentabilidade).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SustentabilidadeActivity.class)));
 
         // Botão de logout
@@ -68,6 +67,33 @@ public class MainActivity extends AppCompatActivity {
             finish(); // Encerra a MainActivity para que o usuário não possa voltar após logout
             return true;
         });
+
+        // Configurar o carrossel de imagens
+        ViewPager2 imageCarousel = findViewById(R.id.imageCarousel);
+        List<Integer> images = Arrays.asList(R.drawable.imagen1, R.drawable.imagen2, R.drawable.imagen3); // Substitua com suas imagens
+        List<String> descriptions = Arrays.asList("Floresta Amazônica", "Rio Amazonas", "Fauna da Amazônia");
+        List<String> credits = Arrays.asList("Foto: João Silva", "Foto: Maria Oliveira", "Foto: Pedro Santos");
+
+        ImageCarouselAdapter adapter = new ImageCarouselAdapter(this, images, descriptions, credits);
+        imageCarousel.setAdapter(adapter);
+
+        // Transição automática de imagens a cada 3 segundos
+        imageCarousel.postDelayed(new Runnable() {
+            int currentItem = 0;
+
+            @Override
+            public void run() {
+                if (currentItem >= adapter.getItemCount()) {
+                    currentItem = 0;
+                }
+                imageCarousel.setCurrentItem(currentItem++, true);
+                imageCarousel.postDelayed(this, 3000); // 3 segundos
+            }
+        }, 3000);
+
+        // Configurar mensagem de boas-vindas e descrição do aplicativo
+        TextView welcomeMessage = findViewById(R.id.welcomeMessage);
+        welcomeMessage.setText(getString(R.string.welcome_message_text));
     }
 
     @Override
