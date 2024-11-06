@@ -3,6 +3,9 @@
     <string name="password_hint">Senha</string>
     <string name="login_button_text">Entrar</string>
     <string name="login_button_description">Botão para login</string>
+    <string name="entrar_como_visitante">Entrar como Visitante</string>
+
+
 
     <string name="app_name">Bioma Amazônico</string>
     <string name="open">Abrir menu</string>
@@ -11,6 +14,7 @@
 
     <string name="welcome_message_text">Bem-vindo ao aplicativo, %1$s!</string>
     <string name="carousel_image_description">Imagem de exemplo de carrossel</string>
+    <string name="carousel_image_desc">Imagem do carrossel de fotos</string>
 
 
     <string name="titulo_importancia_amazonia">A Importância da Amazônia</string>

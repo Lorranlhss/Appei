@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         // Configurar o carrossel de imagens
         ViewPager2 imageCarousel = findViewById(R.id.imageCarousel);
         List<Integer> images = Arrays.asList(R.drawable.imagen1, R.drawable.imagen2, R.drawable.imagen3); // Substitua com suas imagens
-        List<String> descriptions = Arrays.asList("Floresta Amazônica", "Rio Amazonas", "Fauna da Amazônia");
+        List<String> descriptions = Arrays.asList("Arara-Azul", "Onça Pintada", "Guaraná fruta amazônica");
         List<String> credits = Arrays.asList("Foto: João Silva", "Foto: Maria Oliveira", "Foto: Pedro Santos");
 
         ImageCarouselAdapter adapter = new ImageCarouselAdapter(this, images, descriptions, credits);
@@ -91,9 +91,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 3000);
 
-        // Configurar mensagem de boas-vindas e descrição do aplicativo
-        TextView welcomeMessage = findViewById(R.id.welcomeMessage);
-        welcomeMessage.setText(getString(R.string.welcome_message_text));
     }
 
     @Override

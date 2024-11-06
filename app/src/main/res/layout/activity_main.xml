@@ -20,29 +20,19 @@
 
         <!-- Conteúdo principal da Activity -->
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="vertical"
-            android:paddingTop="?attr/actionBarSize"
-            android:gravity="center">
+            android:paddingTop="?attr/actionBarSize">
 
-            <!-- Carrossel de Imagens -->
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/imageCarousel"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-            <!-- Mensagem de Boas-Vindas e Descrição do Aplicativo -->
-            <TextView
-                android:id="@+id/welcomeMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="@string/welcome_message_text"
-                android:textAlignment="center"
-                android:textSize="16sp"
-                android:textColor="@color/primaryTextColor"/>
+                android:layout_width="436dp"
+                android:layout_height="818dp" />
         </LinearLayout>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <!-- NavigationView do menu deslizante -->
