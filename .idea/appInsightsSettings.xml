@@ -10,9 +10,9 @@
               <option name="connection">
                 <ConnectionSetting>
                   <option name="appId" value="com.biomaamazonia.appei" />
-                  <option name="mobileSdkAppId" value="1:111604754233:android:1b2d8ae8a3197e8ad36ae8" />
-                  <option name="projectId" value="app-ei-5bd62" />
-                  <option name="projectNumber" value="111604754233" />
+                  <option name="mobileSdkAppId" value="1:571781426998:android:57f02fd8109e391eb88d97" />
+                  <option name="projectId" value="bioma-ico" />
+                  <option name="projectNumber" value="571781426998" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

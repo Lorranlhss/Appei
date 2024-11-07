@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.google.gms.google.services)
+    id("com.android.application")
+    id("com.google.gms.google-services")  // Alias para o plugin do Google Services
 }
 
 android {
@@ -34,17 +34,16 @@ android {
 }
 
 dependencies {
-    implementation(libs.appcompat)
-    implementation(libs.material)
-    implementation(libs.activity)
-    implementation(libs.constraintlayout)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.ext.junit)
-    androidTestImplementation(libs.espresso.core)
-    implementation(libs.play.services.maps)
-    implementation(libs.firebase.database)
-    implementation(libs.firebase.auth)
-    implementation(libs.firebase.database)
-    implementation(libs.firebase.auth)
-    implementation ("com.google.android.material:material:1.9.0")
+    implementation(libs.appcompat)  // Dependência do AppCompat
+    implementation(libs.material)  // Dependência do Material Components
+    implementation(libs.activity)  // Dependência do Android Activity
+    implementation(libs.constraintlayout)  // Dependência do ConstraintLayout
+    testImplementation(libs.junit)  // Dependência de JUnit para testes
+    androidTestImplementation(libs.ext.junit)  // Dependência de JUnit para testes Android
+    androidTestImplementation(libs.espresso.core)  // Dependência do Espresso para testes
+    implementation(libs.play.services.maps)  // Dependência para Play Services Maps
+    implementation(libs.firebase.database)  // Dependência do Firebase Database
+    implementation(libs.firebase.auth)  // Dependência do Firebase Auth
+    implementation(platform(libs.firebase.bom))  // Usando o BOM do Firebase para garantir versões consistentes
+    implementation("com.google.android.gms:play-services-auth:21.2.0")  // Usando o Play Services Auth do catálogo de versões
 }
