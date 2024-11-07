@@ -14,12 +14,20 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 public class MainActivity extends AppCompatActivity {
+
+    private GoogleSignInClient mGoogleSignInClient;  // Declarando a variável do GoogleSignInClient
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -43,15 +51,29 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigationView);
 
+        // Inicialize o mGoogleSignInClient
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()  // Solicitar o e-mail do usuário
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
         // Configurar o menu deslizante
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        // Configurar saudação e versão
+        // Obter o usuário autenticado
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String userName;
+        if (currentUser != null && currentUser.getDisplayName() != null) {
+            userName = currentUser.getDisplayName(); // Nome do usuário logado
+        } else {
+            userName = "Visitante"; // Nome padrão caso não haja usuário logado
+        }
+
+        // Configurar saudação com o nome do usuário
         View headerView = navigationView.getHeaderView(0);
         TextView welcomeText = headerView.findViewById(R.id.welcomeText);
-        String userName = "[Nome do Usuário]"; // inserir nome de usuario armazenado no banco de dados
         welcomeText.setText(getString(R.string.welcome_message, userName));
 
         // Definir ações dos botões
@@ -63,14 +85,13 @@ public class MainActivity extends AppCompatActivity {
 
         // Botão de logout
         navigationView.getMenu().findItem(R.id.nav_logout).setOnMenuItemClickListener(item -> {
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-            finish(); // Encerra a MainActivity para que o usuário não possa voltar após logout
+            signOut();
             return true;
         });
 
         // Configurar o carrossel de imagens
         ViewPager2 imageCarousel = findViewById(R.id.imageCarousel);
-        List<Integer> images = Arrays.asList(R.drawable.imagen1, R.drawable.imagen2, R.drawable.imagen3); // Substitua com suas imagens
+        List<Integer> images = Arrays.asList(R.drawable.imagen1, R.drawable.imagen2, R.drawable.imagen3);
         List<String> descriptions = Arrays.asList("Arara-Azul", "Onça Pintada", "Guaraná fruta amazônica");
         List<String> credits = Arrays.asList("Foto: João Silva", "Foto: Maria Oliveira", "Foto: Pedro Santos");
 
@@ -87,10 +108,22 @@ public class MainActivity extends AppCompatActivity {
                     currentItem = 0;
                 }
                 imageCarousel.setCurrentItem(currentItem++, true);
-                imageCarousel.postDelayed(this, 3000); // 3 segundos
+                imageCarousel.postDelayed(this, 3000);
             }
         }, 3000);
+    }
 
+    // Método para deslogar o usuário
+    private void signOut() {
+        // Deslogar do Firebase
+        FirebaseAuth.getInstance().signOut();
+
+        // Deslogar do Google
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, task -> {
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    finish();
+                });
     }
 
     @Override

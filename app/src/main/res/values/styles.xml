@@ -1,0 +1,9 @@
+<resources>
+    <!-- Estilo comum para os botões -->
+    <style name="ButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:textColor">@color/buttonTextColor</item>
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+</resources>
