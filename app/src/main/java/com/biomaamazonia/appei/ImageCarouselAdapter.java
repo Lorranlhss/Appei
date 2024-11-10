@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,14 +15,11 @@ public class ImageCarouselAdapter extends RecyclerView.Adapter<ImageCarouselAdap
 
     private final Context context;
     private final List<Integer> images;
-    private final List<String> descriptions;
-    private final List<String> credits;
 
-    public ImageCarouselAdapter(Context context, List<Integer> images, List<String> descriptions, List<String> credits) {
+    // Construtor apenas com contexto e lista de imagens
+    public ImageCarouselAdapter(Context context, List<Integer> images) {
         this.context = context;
         this.images = images;
-        this.descriptions = descriptions;
-        this.credits = credits;
     }
 
     @NonNull
@@ -36,8 +32,6 @@ public class ImageCarouselAdapter extends RecyclerView.Adapter<ImageCarouselAdap
     @Override
     public void onBindViewHolder(@NonNull CarouselViewHolder holder, int position) {
         holder.imageView.setImageResource(images.get(position));
-        holder.descriptionTextView.setText(descriptions.get(position));
-        holder.creditTextView.setText(credits.get(position));
     }
 
     @Override
@@ -47,14 +41,10 @@ public class ImageCarouselAdapter extends RecyclerView.Adapter<ImageCarouselAdap
 
     public static class CarouselViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView descriptionTextView;
-        TextView creditTextView;
 
         public CarouselViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.carouselImage);
-            descriptionTextView = itemView.findViewById(R.id.carouselDescription);
-            creditTextView = itemView.findViewById(R.id.carouselCredit);
         }
     }
 }

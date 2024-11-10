@@ -1,5 +1,5 @@
 <resources>
-    <string name="username_hint">Nome de Usuário</string>
+    <string name="username_hint">Email</string>
     <string name="password_hint">Senha</string> <!-- Mantendo apenas uma definição -->
     <string name="login_button_text">Entrar</string>
     <string name="login_button_description">Botão para login</string>
@@ -17,6 +17,8 @@
 
 
     <string name="app_name">Bioma Amazônico</string>
+    <string name="navigation_drawer_open">Abrir Menu</string>
+    <string name="navigation_drawer_close">Fechar Menu</string>
     <string name="open">Abrir menu</string>
     <string name="close">Fechar menu</string>
     <string name="welcome_message">Bem-vindo, %1$s</string>

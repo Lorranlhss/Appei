@@ -1,0 +1,23 @@
+<!-- res/drawable/button_shadow.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Sombra suave na parte de baixo -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#1A000000" /> <!-- Cor preta translúcida para sombra suave -->
+            <corners android:radius="24dp" />
+            <padding
+                android:left="0dp"
+                android:top="0dp"
+                android:right="0dp"
+                android:bottom="2dp" /> <!-- Sombra apenas na parte de baixo -->
+        </shape>
+    </item>
+
+    <!-- Fundo do botão -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/white" />
+            <corners android:radius="24dp" />
+        </shape>
+    </item>
+</layer-list>

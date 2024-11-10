@@ -2,7 +2,6 @@ package com.biomaamazonia.appei;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -11,97 +10,159 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ValueEventListener;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.UUID;
 
-@SuppressWarnings("deprecation") // Suprime os alertas de depreciação para a classe inteira
 public class LoginActivity extends AppCompatActivity {
+
+    private static final int RC_SIGN_IN = 9001;
+    private static final String PREFS_NAME = "UserPrefs";
+    private static final String PREF_VISITOR_REGISTERED = "visitorRegistered";
 
     private EditText usernameEditText, passwordEditText;
     private GoogleSignInClient mGoogleSignInClient;
-    private static final int RC_SIGN_IN = 9001;
+    private DatabaseReference visitorsRef = FirebaseDatabase.getInstance().getReference().child("visitantes");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Verificar se o usuário já está logado no Firebase
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser != null) {
-            // Usuário já logado, redirecionar para a MainActivity
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
+        // Verificar se o usuário já está logado
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            navigateToMainActivity();
         }
 
-        // Inicializando os campos e a contagem de visitantes
-        usernameEditText = findViewById(R.id.usernameEditText);
-        passwordEditText = findViewById(R.id.passwordEditText);
-        Button loginButton = findViewById(R.id.loginButton);
-        Button signUpButton = findViewById(R.id.signUpButton);
-        TextView entraVisitante = findViewById(R.id.entraVisitante);
-        SignInButton googleSignInButton = findViewById(R.id.googleSignInButton);
+        // Inicializando as views
+        initializeViews();
 
+        // Configurando Google Sign-In
+        configureGoogleSignIn();
 
-        // Configurando o Google Sign-In
+        // Configuração do login
+        configureLoginButton();
+
+        // Configuração do cadastro
+        configureSignUpButton();
+
+        // Configuração do clique no "Entrar como Visitante"
+        configureVisitorLogin();
+    }
+
+    private void initializeViews() {
+        usernameEditText = findViewById(R.id.emailField);
+        passwordEditText = findViewById(R.id.passwordField);
+    }
+
+    private void configureGoogleSignIn() {
+        MaterialButton googleSignInButton = findViewById(R.id.googleSignInButton);
         googleSignInButton.setOnClickListener(v -> signInWithGoogle());
 
-        // Configuração do Google Sign-In com o método mais recente
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+    }
 
-        // Validando o login do usuário
-        loginButton.setOnClickListener(v -> {
-            String username = usernameEditText.getText().toString();
-            String password = passwordEditText.getText().toString();
-            if (validateCredentials(username, password)) {
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                finish();
-            } else {
-                Toast.makeText(LoginActivity.this, "Credenciais inválidas", Toast.LENGTH_SHORT).show();
-            }
-        });
+    private void configureLoginButton() {
+        MaterialButton loginButton = findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(v -> validateUser());
+    }
 
-        // Configurando o botão de cadastro
-        signUpButton.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-            startActivity(intent);
-        });
+    private void configureSignUpButton() {
+        MaterialButton signUpButton = findViewById(R.id.registerButton);
+        signUpButton.setOnClickListener(v -> startActivity(new Intent(this, RegisterActivity.class)));
+    }
 
-        // Configuração do texto "Entrar como Visitante" com clique
+    private void configureVisitorLogin() {
+        TextView entraVisitante = findViewById(R.id.entraVisitante);
         SpannableString ss = new SpannableString("Entrar como Visitante");
         ss.setSpan(new CustomClickableSpan(getResources().getColor(R.color.primaryColor)), 0, ss.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         entraVisitante.setText(ss);
         entraVisitante.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
-    // Método para o login com o Google
+    private void validateUser() {
+        String username = usernameEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
+
+        if (username.isEmpty() || password.isEmpty()) {
+            showToast("Preencha todos os campos");
+            return;
+        }
+
+        checkUserCredentials(username, password);
+    }
+
+    private void checkUserCredentials(String username, String password) {
+        FirebaseDatabase.getInstance().getReference("users")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        boolean isValidUser = false;
+                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                            String dbUsername = userSnapshot.child("email").getValue(String.class);
+                            String dbPassword = userSnapshot.child("password").getValue(String.class);
+                            if (dbUsername != null && dbPassword != null && dbUsername.equals(username) && dbPassword.equals(password)) {
+                                isValidUser = true;
+                                String name = userSnapshot.child("name").getValue(String.class);
+                                if (name != null) {
+                                    Log.d("LoginActivity", "Nome do usuário recuperado: " + name);
+                                    saveUserInSharedPreferences(name);  // Salva o nome no SharedPreferences
+                                }
+                                break;
+                            }
+                        }
+
+                        if (isValidUser) {
+                            navigateToMainActivity();
+                        } else {
+                            showToast("Credenciais inválidas");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        showToast("Erro ao acessar o banco de dados");
+                    }
+                });
+    }
+
+    private void saveUserInSharedPreferences(String username) {
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        sharedPreferences.edit().putString("userName", username).apply();
+        Log.d("LoginActivity", "Nome armazenado no SharedPreferences: " + username);
+    }
+
+    private void navigateToMainActivity() {
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        finish();
+    }
+
     private void signInWithGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -116,99 +177,94 @@ public class LoginActivity extends AppCompatActivity {
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             GoogleSignInAccount account = task.getResult();
-                            if (account != null) {
-                                firebaseAuthWithGoogle(account.getIdToken());
-                            }
+                            firebaseAuthWithGoogle(account);
                         } else {
-                            Toast.makeText(LoginActivity.this, "Falha no login com Google", Toast.LENGTH_SHORT).show();
+                            Log.w("LoginActivity", "signInWithCredential:failure", task.getException());
+                            showToast("Falha no login");
                         }
                     });
         }
     }
 
-    // Método para autenticação com o Google e salvar o nome do usuário
-    private void firebaseAuthWithGoogle(String idToken) {
-        FirebaseAuth.getInstance().signInWithCredential(GoogleAuthProvider.getCredential(idToken, null))
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+        FirebaseAuth.getInstance().signInWithCredential(GoogleAuthProvider.getCredential(acct.getIdToken(), null))
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                        String displayName = user != null ? user.getDisplayName() : "Usuário";
-
-                        SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = prefs.edit();
-                        editor.putString("userName", displayName);
-                        editor.apply();
-
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        finish();
+                        updateUI(user);
                     } else {
-                        Toast.makeText(LoginActivity.this, "Autenticação com Google falhou", Toast.LENGTH_SHORT).show();
+                        updateUI(null);
                     }
                 });
     }
 
-    // Método simplificado para validação das credenciais
-    private boolean validateCredentials(String username, String password) {
-        // Retorna false imediatamente se os campos estiverem vazios
-        return !(username.isEmpty() || password.isEmpty());
+    private void updateUI(FirebaseUser user) {
+        if (user != null) {
+            navigateToMainActivity();
+        } else {
+            showToast("Erro no login com Google");
+        }
     }
 
-    // Referencia a quantidade de visitantes contida no Firebase
-    DatabaseReference visitorsRef = FirebaseDatabase.getInstance().getReference().child("visitantes");
+    private void showToast(String message) {
+        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+    }
 
-    // Classe CustomClickableSpan para manipular o clique no texto "Entrar como Visitante"
     private class CustomClickableSpan extends ClickableSpan {
-
         private final int color;
 
-        CustomClickableSpan(int color) {
+        public CustomClickableSpan(int color) {
             this.color = color;
         }
 
         @Override
-        public void onClick(@NonNull View textView) {
-            // Lógica para incrementação de visitantes no Firebase
-            visitorsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Long visitorsCountLong = snapshot.child("cont").getValue(Long.class);
-
-                    if (visitorsCountLong != null) {
-                        int visitorsCount = visitorsCountLong.intValue(); // Converte a contagem de visitantes em inteiro caso não seja null
-                        visitorsCount++; // Incrementa a contagem de visitantes
-
-                        snapshot.getRef().child("cont").setValue(visitorsCount); // Atualiza a contagem de visitantes no banco de dados
-
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            LocalDateTime now = LocalDateTime.now();
-                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm/d-M-yy");
-                            String formattedNow  = now.format(formatter);
-
-                            snapshot.getRef().child("id").child("" + visitorsCount).setValue(formattedNow);
-                        } else {
-                            snapshot.getRef().child("id").child("" + visitorsCount).setValue("");
-                        }
-
-                        // Inicia a MainActivity para o visitante
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Log.e("Error", "O valor de 'cont' é nulo ou não é um número válido.");
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Log.e("Firebase", "Erro ao acessar dados do Firebase: " + error.getMessage());
-                }
-            });
+        public void onClick(@NonNull View widget) {
+            handleVisitorLogin();
         }
 
         @Override
         public void updateDrawState(TextPaint ds) {
-            ds.setColor(color); // Define a cor baseada no TextView
-            ds.setUnderlineText(false); // Remove o sublinhado
+            super.updateDrawState(ds);
+            ds.setColor(color);
+            ds.setUnderlineText(false);
+        }
+    }
+
+    private void handleVisitorLogin() {
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        boolean visitorRegistered = sharedPreferences.getBoolean(PREF_VISITOR_REGISTERED, false);
+
+        if (!visitorRegistered) {
+            // Incrementar contagem apenas para novos visitantes
+            visitorsRef.child("cont").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    int visitorCount = snapshot.exists() ? snapshot.getValue(Integer.class) : 0;
+                    visitorsRef.child("cont").setValue(visitorCount + 1);
+
+                    // Armazenar ID único do dispositivo para evitar duplicidade
+                    String uniqueID = UUID.randomUUID().toString();
+                    visitorsRef.child("dispositivos").child(uniqueID).setValue(true);
+
+                    // Registrar data e hora do primeiro acesso
+                    String currentDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+                    visitorsRef.child("acessos").child("primeiroAcesso").setValue(currentDateTime);
+
+                    // Marcar o dispositivo como registrado
+                    sharedPreferences.edit().putBoolean(PREF_VISITOR_REGISTERED, true).apply();
+                    navigateToMainActivity();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    showToast("Erro ao registrar visitante");
+                }
+            });
+        } else {
+            // Atualizar apenas data e hora do acesso sem incrementar contagem
+            String currentDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+            visitorsRef.child("acessos").child("ultimoAcesso").setValue(currentDateTime);
+            navigateToMainActivity();
         }
     }
 }

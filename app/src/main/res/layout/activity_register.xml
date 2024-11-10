@@ -62,7 +62,7 @@
         android:layout_marginTop="16dp" />
 
     <!-- Botão de Cadastro -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/registerButton"
         android:layout_width="300dp"
         android:layout_height="48dp"
