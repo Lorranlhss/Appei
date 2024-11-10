@@ -106,14 +106,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadUserName() {
-        String savedUserName = sharedPreferences.getString("usersName", null);
-        String savedUserId = sharedPreferences.getString("usersId", null);
+        String savedUserName = sharedPreferences.getString("userName", null);
 
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        if (savedUserName != null && currentUser != null && currentUser.getUid().equals(savedUserId)) {
+        if (savedUserName != null) {
             updateWelcomeMessage(savedUserName);
         } else {
+            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
             if (currentUser != null) {
                 String userId = currentUser.getUid();
                 DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(userId);
@@ -124,22 +122,22 @@ public class MainActivity extends AppCompatActivity {
                         String userNameFromDb = dataSnapshot.child("name").getValue(String.class);
                         if (userNameFromDb != null && !userNameFromDb.isEmpty()) {
                             updateWelcomeMessage(userNameFromDb);
-                            saveUserNameToPreferences(userNameFromDb, userId);
+                            saveUserNameToPreferences(userNameFromDb);
                         }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
+                        // Handle possible errors here
                     }
                 });
             }
         }
     }
 
-    private void saveUserNameToPreferences(String userName, String userId) {
+    private void saveUserNameToPreferences(String userName) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("usersName", userName);
-        editor.putString("usersId", userId);
+        editor.putString("userName", userName);
         editor.apply();
     }
 
