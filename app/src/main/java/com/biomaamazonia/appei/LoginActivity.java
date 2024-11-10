@@ -41,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 9001;
     private static final String PREFS_NAME = "UserPrefs";
     private static final String PREF_VISITOR_REGISTERED = "visitorRegistered";
+    private static final String PREF_USER_NAME = "userName";
 
     private EditText usernameEditText, passwordEditText;
     private GoogleSignInClient mGoogleSignInClient;
@@ -154,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void saveUserInSharedPreferences(String username) {
         SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        sharedPreferences.edit().putString("userName", username).apply();
+        sharedPreferences.edit().putString(PREF_USER_NAME, username).apply();
         Log.d("LoginActivity", "Nome armazenado no SharedPreferences: " + username);
     }
 
@@ -232,6 +233,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void handleVisitorLogin() {
         SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        sharedPreferences.edit().putString(PREF_USER_NAME, "Visitante").apply(); // Salva "Visitante" como nome de usuário
+
         boolean visitorRegistered = sharedPreferences.getBoolean(PREF_VISITOR_REGISTERED, false);
 
         if (!visitorRegistered) {
