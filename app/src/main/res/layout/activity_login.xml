@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,8 +7,21 @@
     android:gravity="center"
     android:padding="16dp">
 
+    <!-- Logo -->
+
+    <!-- EditText para o nome de usuário -->
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="171dp"
+        android:layout_height="265dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="32dp"
+        android:elevation="8dp"
+        android:src="@drawable/logo_bioma_amazonico" />
+
     <EditText
-        android:id="@+id/usernameEditText"
+        android:id="@+id/emailField"
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:hint="@string/username_hint"
@@ -20,8 +32,9 @@
         android:textColorHint="@color/hintColor"
         android:padding="12dp" />
 
+    <!-- EditText para a senha -->
     <EditText
-        android:id="@+id/passwordEditText"
+        android:id="@+id/passwordField"
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:hint="@string/password_hint"
@@ -33,6 +46,7 @@
         android:padding="12dp"
         android:layout_marginTop="16dp" />
 
+    <!-- Botão de login -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loginButton"
         android:layout_width="300dp"
@@ -41,39 +55,66 @@
         android:textColor="@color/buttonTextColor"
         android:layout_marginTop="24dp"
         app:cornerRadius="24dp"
-        app:backgroundTint="@color/primaryColor"
+        android:backgroundTint="@color/primaryColor"
+        android:elevation="4dp"
+        android:translationZ="2dp"
         android:contentDescription="@string/login_button_description" />
 
+    <!-- Botão de cadastro -->
     <Button
-        android:id="@+id/signUpButton"
+        android:id="@+id/registerButton"
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:text="@string/sign_up_button_text"
         android:textColor="@color/buttonTextColor"
         android:layout_marginTop="16dp"
         app:cornerRadius="24dp"
-        app:backgroundTint="@color/brown"
+        android:backgroundTint="@color/brown"
+        android:elevation="4dp"
+        android:translationZ="2dp"
         android:contentDescription="@string/sign_up_button_description" />
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/googleSignInButton"
+    <!-- Botão de login com Google -->
+    <FrameLayout
         android:layout_width="300dp"
         android:layout_height="48dp"
-        android:text="@string/google_sign_in_button_text"
-        android:layout_marginTop="16dp"
-        app:cornerRadius="24dp"
-        android:textColor="@color/buttonTextColor"
-        android:contentDescription="@string/google_sign_in_button_description" />
+        android:layout_marginTop="16dp">
 
+        <!-- Botão do Google Sign-In -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/googleSignInButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/google_sign_in_button_text"
+            android:textColor="@color/black"
+            app:backgroundTint="@null"
+            android:background="@drawable/button_shadow"
+            android:contentDescription="Google Sign-In Button"
+            android:paddingStart="40dp" />
+
+        <!-- Ícone do Google dentro do botão -->
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="24dp"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="12dp"
+            android:contentDescription="Google Icon"
+            android:src="@drawable/google_icon" />
+    </FrameLayout>
+
+
+
+
+    <!-- Texto para entrar como visitante -->
     <TextView
         android:id="@+id/entraVisitante"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/entrar_como_visitante"
-        android:textColor="@color/primaryColor"
-        android:padding="16dp"
-        android:layout_marginTop="16dp"
         android:layout_gravity="center_horizontal"
-        android:background="@android:color/transparent" />
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        android:padding="16dp"
+        android:text="@string/entrar_como_visitante"
+        android:textColor="@color/primaryColor" />
 
 </LinearLayout>

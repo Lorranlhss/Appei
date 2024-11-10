@@ -1,6 +1,8 @@
 package com.biomaamazonia.appei;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -8,18 +10,23 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,21 +34,19 @@ import java.util.List;
 @SuppressWarnings("deprecation")
 public class MainActivity extends AppCompatActivity {
 
-    private GoogleSignInClient mGoogleSignInClient;  // Declarando a variável do GoogleSignInClient
-
+    private GoogleSignInClient mGoogleSignInClient;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Configurar a Toolbar como ActionBar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Obter a ActionBar e habilitar o botão de navegação
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -51,54 +56,41 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigationView);
 
-        // Inicialize o mGoogleSignInClient
+        sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()  // Solicitar o e-mail do usuário
+                .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        // Configurar o menu deslizante
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        // Obter o usuário autenticado
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        String userName;
-        if (currentUser != null && currentUser.getDisplayName() != null) {
-            userName = currentUser.getDisplayName(); // Nome do usuário logado
-        } else {
-            userName = "Visitante"; // Nome padrão caso não haja usuário logado
-        }
+        loadUserName();
 
-        // Configurar saudação com o nome do usuário
         View headerView = navigationView.getHeaderView(0);
-        TextView welcomeText = headerView.findViewById(R.id.welcomeText);
-        welcomeText.setText(getString(R.string.welcome_message, userName));
-
-        // Definir ações dos botões
         headerView.findViewById(R.id.buttonMapa).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MapaActivity.class)));
         headerView.findViewById(R.id.buttonFaunaFlora).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, FaunaFloraActivity.class)));
         headerView.findViewById(R.id.buttonQuiz).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, QuizActivity.class)));
         headerView.findViewById(R.id.buttonImportanciaAmazonia).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ImportanciaAmazoniaActivity.class)));
         headerView.findViewById(R.id.buttonSustentabilidade).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SustentabilidadeActivity.class)));
 
-        // Botão de logout
         navigationView.getMenu().findItem(R.id.nav_logout).setOnMenuItemClickListener(item -> {
             signOut();
             return true;
         });
 
-        // Configurar o carrossel de imagens
         ViewPager2 imageCarousel = findViewById(R.id.imageCarousel);
-        List<Integer> images = Arrays.asList(R.drawable.imagen1, R.drawable.imagen2, R.drawable.imagen3);
-        List<String> descriptions = Arrays.asList("Arara-Azul", "Onça Pintada", "Guaraná fruta amazônica");
-        List<String> credits = Arrays.asList("Foto: João Silva", "Foto: Maria Oliveira", "Foto: Pedro Santos");
+        List<Integer> images = Arrays.asList(
+                R.drawable.imagen1car, R.drawable.imagen2car, R.drawable.imagen3car,
+                R.drawable.imagen4car, R.drawable.imagen5car, R.drawable.imagen6car,
+                R.drawable.imagen7car, R.drawable.imagen8car
+        );
 
-        ImageCarouselAdapter adapter = new ImageCarouselAdapter(this, images, descriptions, credits);
+        ImageCarouselAdapter adapter = new ImageCarouselAdapter(this, images);
         imageCarousel.setAdapter(adapter);
 
-        // Transição automática de imagens a cada 3 segundos
         imageCarousel.postDelayed(new Runnable() {
             int currentItem = 0;
 
@@ -113,12 +105,54 @@ public class MainActivity extends AppCompatActivity {
         }, 3000);
     }
 
-    // Método para deslogar o usuário
-    private void signOut() {
-        // Deslogar do Firebase
-        FirebaseAuth.getInstance().signOut();
+    private void loadUserName() {
+        String savedUserName = sharedPreferences.getString("usersName", null);
+        String savedUserId = sharedPreferences.getString("usersId", null);
 
-        // Deslogar do Google
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (savedUserName != null && currentUser != null && currentUser.getUid().equals(savedUserId)) {
+            updateWelcomeMessage(savedUserName);
+        } else {
+            if (currentUser != null) {
+                String userId = currentUser.getUid();
+                DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(userId);
+
+                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String userNameFromDb = dataSnapshot.child("name").getValue(String.class);
+                        if (userNameFromDb != null && !userNameFromDb.isEmpty()) {
+                            updateWelcomeMessage(userNameFromDb);
+                            saveUserNameToPreferences(userNameFromDb, userId);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+            }
+        }
+    }
+
+    private void saveUserNameToPreferences(String userName, String userId) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("usersName", userName);
+        editor.putString("usersId", userId);
+        editor.apply();
+    }
+
+    private void updateWelcomeMessage(String userName) {
+        runOnUiThread(() -> {
+            View headerView = navigationView.getHeaderView(0);
+            TextView welcomeText = headerView.findViewById(R.id.welcomeText);
+            welcomeText.setText("Bem-vindo, " + userName);
+        });
+    }
+
+    private void signOut() {
+        FirebaseAuth.getInstance().signOut();
         mGoogleSignInClient.signOut()
                 .addOnCompleteListener(this, task -> {
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
@@ -133,5 +167,11 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadUserName();
     }
 }

@@ -1,43 +1,176 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:orientation="vertical"
+    android:background="@color/backgroundColor">
 
-    <LinearLayout
+    <!-- Cabeçalho fixo no topo -->
+    <TextView
+        android:id="@+id/titulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:background="@color/primaryColor"
+        android:fontFamily="sans-serif-medium"
+        android:padding="16dp"
+        android:text="Sustentabilidade"
+        android:textAlignment="center"
+        android:textColor="@color/backgroundColor"
+        android:textSize="24sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
+    <!-- Conteúdo rolável -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sustentabilidade"
-            android:textSize="24sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
-            android:paddingBottom="16dp"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Práticas sustentáveis são essenciais para preservar a Amazônia e proteger o meio ambiente. Aqui estão algumas sugestões de ações que cada um de nós pode adotar para contribuir com essa missão:"
-            android:textSize="16sp"
-            android:paddingBottom="8dp"/>
+            <!-- Texto principal -->
+            <TextView
+                android:id="@+id/textoprincipal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:justificationMode="inter_word"
+                android:paddingBottom="16dp"
+                android:textSize="20sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="• Reduza o consumo de plástico e outros materiais descartáveis.\n• Apoie empresas que promovam a sustentabilidade e a preservação da Amazônia.\n• Participe de campanhas e apoie ONGs voltadas para a proteção ambiental.\n• Conscientize amigos e familiares sobre a importância de proteger a floresta."
-            android:textSize="16sp"
-            android:paddingBottom="8dp"/>
+            <!-- Primeira imagem e seção de texto -->
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="match_parent"
+                android:layout_height="191dp"
+                android:src="@drawable/img1_susten"
+                android:contentDescription="Imagem de práticas sustentáveis"
+                android:scaleType="fitCenter"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ao adotar práticas sustentáveis, ajudamos a preservar a biodiversidade e os recursos naturais da Amazônia para as futuras gerações."
-            android:textSize="16sp"
-            android:paddingBottom="8dp"/>
+            <TextView
+                android:id="@+id/subtitulo1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="20sp" />
 
-    </LinearLayout>
-</ScrollView>
+            <TextView
+                android:id="@+id/textview1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:justificationMode="inter_word"
+                android:paddingBottom="16dp"
+                android:textSize="18sp" />
+
+            <!-- Segunda imagem e seção de texto -->
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/img2_susten"
+                android:contentDescription="Imagem sobre o tripé da sustentabilidade"
+                android:scaleType="fitCenter"/>
+
+            <TextView
+                android:id="@+id/subtitulo2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:justificationMode="inter_word"
+                android:paddingBottom="16dp"
+                android:textSize="18sp" />
+
+            <!-- Terceira imagem e seção de texto -->
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/img3_susten"
+                android:contentDescription="Imagem de energia renovável"
+                android:scaleType="fitCenter"/>
+
+            <TextView
+                android:id="@+id/subtitulo3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textview3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:justificationMode="inter_word"
+                android:paddingBottom="16dp"
+                android:textSize="18sp" />
+
+            <!-- Quarta imagem e seção de texto -->
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/img4_susten"
+                android:contentDescription="Imagem sobre agricultura sustentável"
+                android:scaleType="fitCenter"/>
+
+            <TextView
+                android:id="@+id/subtitulo4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textview4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:justificationMode="inter_word"
+                android:paddingBottom="16dp"
+                android:textSize="18sp" />
+
+            <!-- Quinta imagem e seção de texto -->
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/img5_susten"
+                android:contentDescription="Imagem sobre conservação da água"
+                android:scaleType="fitCenter"/>
+
+            <TextView
+                android:id="@+id/subtitulo5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textview5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:justificationMode="inter_word"
+                android:paddingBottom="16dp"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
