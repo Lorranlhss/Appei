@@ -1,40 +1,39 @@
-
 package com.biomaamazonia.appei;
 
 public class FaunaFloraItem {
-    private String name;
-    private String description;
-    private String imageUrl;
+    private String titulo;
+    private String descricao;
+    private String imagemUrl;
 
     // Construtor
-    public FaunaFloraItem(String name, String description, String imageUrl) {
-        this.name = name;
-        this.description = description;
-        this.imageUrl = imageUrl;
+    public FaunaFloraItem(String titulo, String descricao, String imagemUrl) {
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.imagemUrl = imagemUrl;
     }
 
     // Getters e Setters
-    public String getName() {
-        return name;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImagemUrl() {
+        return imagemUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImagemUrl(String imagemUrl) {
+        this.imagemUrl = imagemUrl;
     }
 }
