@@ -1,4 +1,3 @@
-
 package com.biomaamazonia.appei;
 
 // FaunaFloraAdapter.java
@@ -57,4 +56,5 @@ public class FaunaFloraAdapter extends RecyclerView.Adapter<FaunaFloraAdapter.Vi
             imagemView = itemView.findViewById(R.id.faunaFloraImageView);
         }
     }
+
 }

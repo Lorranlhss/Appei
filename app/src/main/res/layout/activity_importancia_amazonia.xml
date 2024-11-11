@@ -35,10 +35,11 @@
                 android:id="@+id/titulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
-                android:textSize="20sp"
+                android:fontFamily="serif"
                 android:paddingBottom="16dp"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <!-- Conteúdo das seções de texto e imagens -->
             <ImageView
@@ -53,7 +54,7 @@
                 android:id="@+id/paragr1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
+                android:fontFamily="serif"
                 android:justificationMode="inter_word"
                 android:paddingBottom="16dp"
                 android:textSize="18sp" />
@@ -70,7 +71,7 @@
                 android:id="@+id/paragr2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
+                android:fontFamily="serif"
                 android:justificationMode="inter_word"
                 android:paddingBottom="16dp"
                 android:textSize="18sp" />
@@ -87,7 +88,7 @@
                 android:id="@+id/paragr3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
+                android:fontFamily="serif"
                 android:justificationMode="inter_word"
                 android:paddingBottom="16dp"
                 android:textSize="18sp" />
@@ -104,7 +105,7 @@
                 android:id="@+id/paragr4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
+                android:fontFamily="serif"
                 android:justificationMode="inter_word"
                 android:paddingBottom="16dp"
                 android:textSize="18sp" />

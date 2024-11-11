@@ -239,22 +239,24 @@ public class LoginActivity extends AppCompatActivity {
 
         if (!visitorRegistered) {
             // Incrementar contagem apenas para novos visitantes
-            visitorsRef.child("cont").addListenerForSingleValueEvent(new ValueEventListener() {
+            visitorsRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    int visitorCount = snapshot.exists() ? snapshot.getValue(Integer.class) : 0;
+                    int visitorCount = snapshot.exists() ? snapshot.child("cont").getValue(Integer.class) : 0;
                     visitorsRef.child("cont").setValue(visitorCount + 1);
 
                     // Armazenar ID único do dispositivo para evitar duplicidade
                     String uniqueID = UUID.randomUUID().toString();
+
                     visitorsRef.child("dispositivos").child(uniqueID).setValue(true);
 
                     // Registrar data e hora do primeiro acesso
                     String currentDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-                    visitorsRef.child("acessos").child("primeiroAcesso").setValue(currentDateTime);
+                    visitorsRef.child("dispositivos").child(uniqueID).child("primeiroAcesso").setValue(currentDateTime);
 
                     // Marcar o dispositivo como registrado
                     sharedPreferences.edit().putBoolean(PREF_VISITOR_REGISTERED, true).apply();
+                    sharedPreferences.edit().putString("visitorID", uniqueID).apply();
                     navigateToMainActivity();
                 }
 
@@ -266,7 +268,8 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             // Atualizar apenas data e hora do acesso sem incrementar contagem
             String currentDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-            visitorsRef.child("acessos").child("ultimoAcesso").setValue(currentDateTime);
+            String visitorID = sharedPreferences.getString("visitorID", "");
+            visitorsRef.child("dispositivos").child(visitorID).child("ultimoAcesso").setValue(currentDateTime);
             navigateToMainActivity();
         }
     }

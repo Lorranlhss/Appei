@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bem-vindo, [Nome do Usuário]"
+        android:textStyle="bold"
         android:textSize="18sp"
         android:textColor="@android:color/white" />
 
@@ -21,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/primaryColor"
-        android:text="Importância da Amazônia"
+        android:text="Conheça a Amazonia"
         android:layout_marginTop="8dp"/>
     <Button
         android:id="@+id/buttonSustentabilidade"
