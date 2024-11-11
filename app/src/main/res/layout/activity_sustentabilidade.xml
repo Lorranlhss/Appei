@@ -5,6 +5,8 @@
     android:orientation="vertical"
     android:background="@color/backgroundColor">
 
+
+
     <!-- Cabeçalho fixo no topo -->
     <TextView
         android:id="@+id/titulo"
@@ -15,8 +17,8 @@
         android:padding="16dp"
         android:text="Sustentabilidade"
         android:textAlignment="center"
-        android:textColor="@color/backgroundColor"
-        android:textSize="24sp" />
+        android:textColor="@color/buttonTextColor"
+        android:textSize="26sp" />
 
     <!-- Conteúdo rolável -->
     <ScrollView
@@ -35,9 +37,10 @@
                 android:id="@+id/textoprincipal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
+                android:fontFamily="serif"
                 android:justificationMode="inter_word"
                 android:paddingBottom="16dp"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="20sp" />
 
             <!-- Primeira imagem e seção de texto -->
@@ -54,16 +57,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="serif"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textview1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
+                android:fontFamily="serif"
                 android:justificationMode="inter_word"
                 android:paddingBottom="16dp"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="18sp" />
 
             <!-- Segunda imagem e seção de texto -->
@@ -80,16 +85,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="serif"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
+                android:fontFamily="serif"
                 android:justificationMode="inter_word"
                 android:paddingBottom="16dp"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="18sp" />
 
             <!-- Terceira imagem e seção de texto -->
@@ -106,16 +113,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="serif"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textview3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
+                android:fontFamily="serif"
                 android:justificationMode="inter_word"
                 android:paddingBottom="16dp"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="18sp" />
 
             <!-- Quarta imagem e seção de texto -->
@@ -132,16 +141,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="serif"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textview4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
+                android:fontFamily="serif"
                 android:justificationMode="inter_word"
                 android:paddingBottom="16dp"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="18sp" />
 
             <!-- Quinta imagem e seção de texto -->
@@ -158,16 +169,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="serif"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textview5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
+                android:fontFamily="serif"
                 android:justificationMode="inter_word"
                 android:paddingBottom="16dp"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="18sp" />
 
         </LinearLayout>
