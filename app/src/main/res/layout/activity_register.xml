@@ -4,71 +4,80 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="16dp">
+    android:padding="@dimen/layout_padding">
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/logo_height"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="@dimen/logo_margin_bottom"
+        android:elevation="8dp"
+        android:src="@drawable/logo_bioma_amazonico" />
 
     <!-- Nome -->
     <EditText
         android:id="@+id/nameEditText"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edit_text_height"
         android:hint="@string/name_hint"
         android:inputType="textPersonName"
         android:autofillHints="name"
         android:textColor="@color/black"
         android:background="@color/inputBackground"
         android:textColorHint="@color/hintColor"
-        android:padding="12dp" />
+        android:padding="@dimen/edit_text_padding" />
 
     <!-- E-mail -->
     <EditText
         android:id="@+id/emailEditText"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edit_text_height"
         android:hint="@string/email_hint"
         android:inputType="textEmailAddress"
         android:autofillHints="emailAddress"
         android:textColor="@color/black"
         android:background="@color/inputBackground"
         android:textColorHint="@color/hintColor"
-        android:padding="12dp"
-        android:layout_marginTop="16dp" />
+        android:padding="@dimen/edit_text_padding"
+        android:layout_marginTop="@dimen/edit_text_margin_top" />
 
     <!-- Senha -->
     <EditText
         android:id="@+id/passwordEditText"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edit_text_height"
         android:hint="@string/password_hint"
         android:inputType="textPassword"
         android:autofillHints="newPassword"
         android:textColor="@color/black"
         android:background="@color/inputBackground"
         android:textColorHint="@color/hintColor"
-        android:padding="12dp"
-        android:layout_marginTop="16dp" />
+        android:padding="@dimen/edit_text_padding"
+        android:layout_marginTop="@dimen/edit_text_margin_top" />
 
     <!-- Confirmar Senha -->
     <EditText
         android:id="@+id/confirmPasswordEditText"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edit_text_height"
         android:hint="@string/confirm_password_hint"
         android:inputType="textPassword"
         android:autofillHints="newPasswordConfirm"
         android:textColor="@color/black"
         android:background="@color/inputBackground"
         android:textColorHint="@color/hintColor"
-        android:padding="12dp"
-        android:layout_marginTop="16dp" />
+        android:padding="@dimen/edit_text_padding"
+        android:layout_marginTop="@dimen/edit_text_margin_top" />
 
     <!-- Botão de Cadastro -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/registerButton"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
         android:text="@string/sign_up_button_text"
         android:textColor="@color/buttonTextColor"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="@dimen/button_margin_top"
         android:backgroundTint="@color/brown"
         android:contentDescription="@string/sign_up_button_description" />
 </LinearLayout>

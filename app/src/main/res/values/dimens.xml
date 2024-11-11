@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Definição de margens -->
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>  <!-- Margem média -->
+    <dimen name="margin_large">32dp</dimen>   <!-- Margem grande -->
+
+    <!-- Dimensões para o EditText -->
+    <dimen name="edit_text_height">48dp</dimen>
+    <dimen name="edit_text_padding">12dp</dimen>
+    <dimen name="edit_text_margin_top">16dp</dimen>
+
+    <!-- Dimensões para os botões -->
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="button_margin_top">24dp</dimen>
+
+    <!-- Padding geral para layouts -->
+    <dimen name="layout_padding">16dp</dimen>
+
+    <!-- Tamanho do texto -->
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="text_size_large">18sp</dimen>
+
+    <!-- Dimensões para o logo e imagem -->
+    <dimen name="logo_margin_bottom">32dp</dimen>
+    <dimen name="logo_height">200dp</dimen>
+
+    <!-- Dimensão para o visitante -->
+    <dimen name="visitante_margin_top">16dp</dimen>
+
+    <!-- Tamanhos para telas pequenas -->
+    <dimen name="small_screen_button_margin_top">12dp</dimen>
+    <dimen name="small_screen_text_size">12sp</dimen>
+
+    <!-- Tamanhos para telas grandes (tablets) -->
+    <dimen name="large_screen_button_margin_top">32dp</dimen>
+    <dimen name="large_screen_text_size">22sp</dimen>
+
+    <!-- Dimensões para a toolbar e o carrossel -->
+    <dimen name="toolbar_height">56dp</dimen> <!-- altura da toolbar -->
+
+    <!-- Dimensões para ImageView em telas grandes -->
+    <dimen name="image_view_height_large">300dp</dimen> <!-- Ajuste conforme necessário -->
+
+    <!-- Dimensões para o carrossel -->
+    <dimen name="carousel_width">413dp</dimen>
+    <dimen name="carousel_height">520dp</dimen>
+
+</resources>

@@ -5,55 +5,54 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="16dp">
+    android:padding="@dimen/layout_padding"
+    android:weightSum="1">
 
     <!-- Logo -->
-
-    <!-- EditText para o nome de usuário -->
-
     <ImageView
         android:id="@+id/logoImageView"
-        android:layout_width="171dp"
-        android:layout_height="265dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/logo_height"
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="@dimen/logo_margin_bottom"
         android:elevation="8dp"
         android:src="@drawable/logo_bioma_amazonico" />
 
+    <!-- EditText para o nome de usuário -->
     <EditText
         android:id="@+id/emailField"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edit_text_height"
         android:hint="@string/username_hint"
         android:inputType="text"
         android:autofillHints="username"
         android:textColor="@color/black"
         android:background="@color/inputBackground"
         android:textColorHint="@color/hintColor"
-        android:padding="12dp" />
+        android:padding="@dimen/edit_text_padding" />
 
     <!-- EditText para a senha -->
     <EditText
         android:id="@+id/passwordField"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edit_text_height"
         android:hint="@string/password_hint"
         android:inputType="textPassword"
         android:autofillHints="password"
         android:textColor="@color/black"
         android:background="@color/inputBackground"
         android:textColorHint="@color/hintColor"
-        android:padding="12dp"
-        android:layout_marginTop="16dp" />
+        android:padding="@dimen/edit_text_padding"
+        android:layout_marginTop="@dimen/edit_text_margin_top" />
 
     <!-- Botão de login -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loginButton"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
         android:text="@string/login_button_text"
         android:textColor="@color/buttonTextColor"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="@dimen/button_margin_top"
         app:cornerRadius="24dp"
         android:backgroundTint="@color/primaryColor"
         android:elevation="4dp"
@@ -63,11 +62,11 @@
     <!-- Botão de cadastro -->
     <Button
         android:id="@+id/registerButton"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
         android:text="@string/sign_up_button_text"
         android:textColor="@color/buttonTextColor"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/button_margin_top"
         app:cornerRadius="24dp"
         android:backgroundTint="@color/brown"
         android:elevation="4dp"
@@ -76,9 +75,9 @@
 
     <!-- Botão de login com Google -->
     <FrameLayout
-        android:layout_width="300dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp">
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginTop="@dimen/button_margin_top">
 
         <!-- Botão do Google Sign-In -->
         <com.google.android.material.button.MaterialButton
@@ -102,16 +101,13 @@
             android:src="@drawable/google_icon" />
     </FrameLayout>
 
-
-
-
     <!-- Texto para entrar como visitante -->
     <TextView
         android:id="@+id/entraVisitante"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/visitante_margin_top"
         android:background="@android:color/transparent"
         android:padding="16dp"
         android:text="@string/entrar_como_visitante"
