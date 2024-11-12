@@ -112,7 +112,7 @@ public class QuizActivity extends AppCompatActivity {
                 perguntaAtual++;
                 marcador = false;
             }
-            if (perguntaAtual < perguntas.size() - 1) {
+            if (perguntaAtual < perguntas.size()) {
                 exibirPergunta();
             } else {
                 finalizarQuiz();
