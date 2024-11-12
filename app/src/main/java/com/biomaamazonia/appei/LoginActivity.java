@@ -201,6 +201,19 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
+            // Extrair o nome do usuário a partir do FirebaseUser
+            String name = user.getDisplayName();
+
+            if (name != null && !name.isEmpty()) {
+                // Salvar o nome no SharedPreferences
+                saveUserInSharedPreferences(name);
+                Log.d("LoginActivity", "Nome do usuário Google armazenado: " + name);
+            } else {
+                Log.w("LoginActivity", "Nome do usuário Google não está disponível.");
+                // Opcional: Definir um nome padrão ou lidar com a ausência do nome
+                saveUserInSharedPreferences("Usuário Google");
+            }
+
             navigateToMainActivity();
         } else {
             showToast("Erro no login com Google");
@@ -245,14 +258,16 @@ public class LoginActivity extends AppCompatActivity {
                     int visitorCount = snapshot.exists() ? snapshot.child("cont").getValue(Integer.class) : 0;
                     visitorsRef.child("cont").setValue(visitorCount + 1);
 
-                    // Armazenar ID único do dispositivo para evitar duplicidade
+                    // Gerar ID único e salvar
                     String uniqueID = UUID.randomUUID().toString();
-
                     visitorsRef.child("dispositivos").child(uniqueID).setValue(true);
 
                     // Registrar data e hora do primeiro acesso
                     String currentDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
                     visitorsRef.child("dispositivos").child(uniqueID).child("primeiroAcesso").setValue(currentDateTime);
+
+                    // Registrar também o primeiro acesso como último acesso inicialmente
+                    visitorsRef.child("dispositivos").child(uniqueID).child("ultimoAcesso").setValue(currentDateTime);
 
                     // Marcar o dispositivo como registrado
                     sharedPreferences.edit().putBoolean(PREF_VISITOR_REGISTERED, true).apply();
@@ -266,11 +281,17 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         } else {
-            // Atualizar apenas data e hora do acesso sem incrementar contagem
+            // Atualizar apenas a data e hora do último acesso sem incrementar a contagem
             String currentDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
             String visitorID = sharedPreferences.getString("visitorID", "");
-            visitorsRef.child("dispositivos").child(visitorID).child("ultimoAcesso").setValue(currentDateTime);
+
+            // Verifica se há um visitorID salvo
+            if (!visitorID.isEmpty()) {
+                visitorsRef.child("dispositivos").child(visitorID).child("ultimoAcesso").setValue(currentDateTime);
+            }
+
             navigateToMainActivity();
         }
     }
+
 }
