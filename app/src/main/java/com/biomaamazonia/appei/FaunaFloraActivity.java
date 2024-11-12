@@ -25,6 +25,7 @@ public class FaunaFloraActivity extends AppCompatActivity {
 
         // Adicionando 20 cards com dados fictícios
         adicionarItems();
+
     }
 
     private void adicionarItems() {
