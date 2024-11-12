@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "571781426998",
+    "firebase_url": "https://bioma-ico-default-rtdb.firebaseio.com",
+    "project_id": "bioma-ico",
+    "storage_bucket": "bioma-ico.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571781426998:android:57f02fd8109e391eb88d97",
+        "android_client_info": {
+          "package_name": "com.biomaamazonia.appei"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "571781426998-7rt3e73lgu53ml2on7hras8b1b8n89dt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.biomaamazonia.appei",
+            "certificate_hash": "838fa091edce6954cbd080fdbca176ecc67d04f7"
+          }
+        },
+        {
+          "client_id": "571781426998-jd4a5lrvc0hrab0jnuj3e0rukk1dfnd2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCitvnaSPEXCu-PI_B7hdD8QG7Tvuor66w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "571781426998-jd4a5lrvc0hrab0jnuj3e0rukk1dfnd2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
