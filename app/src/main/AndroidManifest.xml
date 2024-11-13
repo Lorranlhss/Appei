@@ -38,6 +38,7 @@
         <activity android:name=".ImportanciaAmazoniaActivity" android:exported="false" />
         <activity android:name=".SustentabilidadeActivity" android:exported="false" />
         <activity android:name=".AvaliacaoActivity" android:exported="false" />
+        <activity android:name=".AboutCreatorsActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

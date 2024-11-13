@@ -1,5 +1,8 @@
-<!-- nav_menu.xml -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_about_creator"
+        android:title="Sobre os Criadores"
+        android:icon="@drawable/ic_info" />
     <item
         android:id="@+id/nav_logout"
         android:title="Logout"

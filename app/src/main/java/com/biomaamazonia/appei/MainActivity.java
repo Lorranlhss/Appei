@@ -81,6 +81,12 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
+        // Configura o clique no item "Sobre o Criador" para abrir a nova Activity
+        navigationView.getMenu().findItem(R.id.menu_about_creator).setOnMenuItemClickListener(item -> {
+            startActivity(new Intent(MainActivity.this, AboutCreatorsActivity.class));
+            return true;
+        });
+
         headerView.findViewById(R.id.buttonAvaliacao).setOnClickListener(v ->
                 startActivity(new Intent(MainActivity.this, AvaliacaoActivity.class))
         );
