@@ -12,6 +12,7 @@
 
     <!-- Dimensões para os botões -->
     <dimen name="button_height">48dp</dimen>
+    <dimen name="button_width">380dp</dimen>
     <dimen name="button_margin_top">24dp</dimen>
 
     <!-- Padding geral para layouts -->
@@ -46,5 +47,15 @@
     <!-- Dimensões para o carrossel -->
     <dimen name="carousel_width">413dp</dimen>
     <dimen name="carousel_height">520dp</dimen>
+
+    <!-- Espaçamentos -->
+    <dimen name="padding_large">16dp</dimen>
+
+    <!-- Tamanhos de texto -->
+    <dimen name="text_size_toolbar">20sp</dimen>
+    <dimen name="text_size_incentivo">16sp</dimen>
+
+    <!-- Dimensões da logo -->
+    <dimen name="logo_width">100dp</dimen>
 
 </resources>

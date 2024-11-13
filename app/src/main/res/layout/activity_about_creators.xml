@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/backgroundColor">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Título da Tela -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sobre os Criadores"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:paddingBottom="16dp" />
+
+        <!-- Informações do Professor -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Professor:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#555555"
+            android:paddingTop="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lorran Henrique da Silva e Silva"
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:paddingBottom="16dp" />
+
+        <!-- Informações dos Alunos -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alunos:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#555555"
+            android:paddingTop="8dp" />
+
+        <!-- Lista de Alunos -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alcemir Sotero da Silva Junior\nAlexandre Lima Maciel\nArthur Arley Silva Cardoso\nDavi de Almeida Nunes\nFelipe Natanael da Silva Diniz\nGuilherme Pereira Almeida\nHaziel Roberto Lopes da Silva\nHeitor Jose Sarrazin Coelho\nJanelson Palheta da Silva\nJim Morrison Ferreira\nLevi Dos Santos Almeida\nLucas Pereira Pinto\nMarcus Massymus Pinheiro da Silva\nMonik Seixas de Azevedo\nPaulo Davi Gemaque Fonseca\nPedro Henrique Ferreira Macedo\nRikelmy Candido Louzada\nVinicius Asafe Monteiro Vasconcelos\nVinicius Pires Soares\nYan Carlos Valeta Lima\nYashim Gomes de Abreu"
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:lineSpacingExtra="4dp" />
+
+    </LinearLayout>
+</ScrollView>
