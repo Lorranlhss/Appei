@@ -53,4 +53,12 @@
         android:text="Fauna e Flora"
         android:layout_marginTop="8dp"/>
 
+    <Button
+        android:id="@+id/buttonAvaliacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/primaryColor"
+        android:text="Avaliar o App"
+        android:layout_marginTop="8dp"/>
+
 </LinearLayout>

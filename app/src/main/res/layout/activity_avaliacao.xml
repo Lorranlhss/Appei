@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/backgroundColor">
+
+    <!-- Texto de incentivo para responder a pesquisa -->
+    <TextView
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primaryColor"
+        android:fontFamily="sans-serif-medium"
+        android:padding="16dp"
+        android:text="PESQUISA DE SATISFAÇÃO"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_toolbar" />
+
+    <ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/logo_height"
+        android:layout_marginTop="@dimen/logo_margin_bottom"
+        android:src="@drawable/logo_bioma_amazonico" />
+
+    <!-- Texto incentivando o usuário a responder a pesquisa -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="@dimen/margin_large"
+        android:text="Sua opinião é muito importante para nós!\n Como você avalia o nosso app?"
+        android:textSize="@dimen/text_size_incentivo"
+        android:textStyle="bold" />
+
+    <!-- Layout vertical para centralizar os botões -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/buttonExcelente"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:backgroundTint="@color/primaryColor"
+            android:text="EXCELENTE" />
+
+        <Button
+            android:id="@+id/buttonBom"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="@dimen/button_margin_top"
+            android:backgroundTint="@color/primaryColor"
+            android:text="BOM" />
+
+        <Button
+            android:id="@+id/buttonMediano"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="@dimen/button_margin_top"
+            android:backgroundTint="@color/primaryColor"
+            android:text="MEDIANO" />
+
+        <Button
+            android:id="@+id/buttonRegular"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="@dimen/button_margin_top"
+            android:backgroundTint="@color/primaryColor"
+            android:text="REGULAR" />
+
+        <Button
+            android:id="@+id/buttonPessimo"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="@dimen/button_margin_top"
+            android:backgroundTint="@color/primaryColor"
+            android:text="PÉSSIMO" />
+
+    </LinearLayout>
+
+    <!-- Logo do app abaixo da pesquisa -->
+    </LinearLayout>

@@ -81,6 +81,11 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
+        headerView.findViewById(R.id.buttonAvaliacao).setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, AvaliacaoActivity.class))
+        );
+
+
         ViewPager2 imageCarousel = findViewById(R.id.imageCarousel);
         List<Integer> images = Arrays.asList(
                 R.drawable.imagen1car, R.drawable.imagen2car, R.drawable.imagen3car,

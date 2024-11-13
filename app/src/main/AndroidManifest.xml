@@ -25,42 +25,27 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".RegisterActivity" android:exported="false" />
 
         <activity
             android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
-        <activity
-            android:name=".QuizActivity"
-            android:exported="false" />
-        <activity
-            android:name=".FaunaFloraActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MapaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ImportanciaAmazoniaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SustentabilidadeActivity"
-            android:exported="false" />
+        <activity android:name=".QuizActivity" android:exported="false" />
+        <activity android:name=".FaunaFloraActivity" android:exported="false" />
+        <activity android:name=".MapaActivity" android:exported="false" />
+        <activity android:name=".ImportanciaAmazoniaActivity" android:exported="false" />
+        <activity android:name=".SustentabilidadeActivity" android:exported="false" />
+        <activity android:name=".AvaliacaoActivity" android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCmmXOLpbXsSaW4LZCiA2WoiNY30ozI7RE" />
+            android:value="@string/API_KEY" />
 
-        <!-- Adicione esta configuração para o Google Sign-In -->
         <meta-data
             android:name="com.google.android.gms.auth.api.signin.GoogleSignInOptions"
             android:value="@string/default_web_client_id" />
 
     </application>
-
 </manifest>

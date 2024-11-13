@@ -1,4 +1,5 @@
 <resources>
+    <string name="API_KEY">AIzaSyCmmXOLpbXsSaW4LZCiA2WoiNY30ozI7RE</string>
     <string name="username_hint">Email</string>
     <string name="password_hint">Senha</string> <!-- Mantendo apenas uma definição -->
     <string name="login_button_text">Entrar</string>
