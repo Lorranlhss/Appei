@@ -32,6 +32,7 @@
         android:gravity="center"
         android:paddingBottom="@dimen/margin_large"
         android:text="Sua opinião é muito importante para nós!\n Como você avalia o nosso app?"
+        android:textColor="@color/primaryTextColor"
         android:textSize="@dimen/text_size_incentivo"
         android:textStyle="bold" />
 
@@ -47,6 +48,7 @@
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_height"
             android:backgroundTint="@color/primaryColor"
+            android:textColor="@color/buttonTextColor"
             android:text="EXCELENTE" />
 
         <Button
@@ -55,6 +57,7 @@
             android:layout_height="@dimen/button_height"
             android:layout_marginTop="@dimen/button_margin_top"
             android:backgroundTint="@color/primaryColor"
+            android:textColor="@color/buttonTextColor"
             android:text="BOM" />
 
         <Button
@@ -63,6 +66,7 @@
             android:layout_height="@dimen/button_height"
             android:layout_marginTop="@dimen/button_margin_top"
             android:backgroundTint="@color/primaryColor"
+            android:textColor="@color/buttonTextColor"
             android:text="MEDIANO" />
 
         <Button
@@ -71,6 +75,7 @@
             android:layout_height="@dimen/button_height"
             android:layout_marginTop="@dimen/button_margin_top"
             android:backgroundTint="@color/primaryColor"
+            android:textColor="@color/buttonTextColor"
             android:text="REGULAR" />
 
         <Button
@@ -79,6 +84,7 @@
             android:layout_height="@dimen/button_height"
             android:layout_marginTop="@dimen/button_margin_top"
             android:backgroundTint="@color/primaryColor"
+            android:textColor="@color/buttonTextColor"
             android:text="PÉSSIMO" />
 
     </LinearLayout>

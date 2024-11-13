@@ -27,7 +27,7 @@
         android:inputType="text"
         android:autofillHints="username"
         android:textColor="@color/black"
-        android:background="@color/inputBackground"
+        android:background="@color/white"
         android:textColorHint="@color/hintColor"
         android:padding="@dimen/edit_text_padding" />
 

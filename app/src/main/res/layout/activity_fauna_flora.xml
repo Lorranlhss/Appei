@@ -6,19 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".FaunaFloraActivity">
 
-
     <TextView
         android:id="@+id/titleTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Explore a Fauna e Flora"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:background="@color/primaryColor"
+        android:fontFamily="sans-serif-medium"
         android:padding="16dp"
-        android:textColor="@color/primaryColor"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:text="FAUNA E FLORA"
+        android:textAlignment="center"
+        android:textColor="@color/buttonTextColor"
+        android:textSize="26sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewFaunaFlora"

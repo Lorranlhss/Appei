@@ -8,12 +8,12 @@
     <color name="primaryDarkColor">#2E7D32</color>
     <color name="accentColor">#FFC107</color>
     <color name="brown">#866513</color>
-    <color name="textColor">#212121</color>
+    <color name="textDarkColor">#FFFFFF</color>
     <color name="hintColor">#757575</color>
     <color name="inputBackground">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="primaryTextColor">#000000</color>
     <color name="textPrimary">#333333</color>
-    <color name="primaryLightColor">#BB86FC</color>
+    <color name="primaryLightColor">#000000</color>
     <color name="white">#FFFFFF</color>
 </resources>
