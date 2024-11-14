@@ -1,10 +1,13 @@
 package com.biomaamazonia.appei;
 
+import android.util.Log;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.view.View;
 import android.widget.TextView;
 
@@ -76,9 +79,10 @@ public class MainActivity extends AppCompatActivity {
         headerView.findViewById(R.id.buttonImportanciaAmazonia).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ImportanciaAmazoniaActivity.class)));
         headerView.findViewById(R.id.buttonSustentabilidade).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SustentabilidadeActivity.class)));
 
-        navigationView.getMenu().findItem(R.id.nav_logout).setOnMenuItemClickListener(item -> {
-            signOut();
-            return true;
+        Button buttonAvaliacao = findViewById(R.id.buttonAvaliacao);
+        buttonAvaliacao.setOnClickListener(v -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://172.16.255.10:3000/"));
+            startActivity(browserIntent);
         });
 
         // Configura o clique no item "Sobre o Criador" para abrir a nova Activity
@@ -87,10 +91,14 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
+        navigationView.getMenu().findItem(R.id.nav_logout).setOnMenuItemClickListener(item -> {
+            signOut();
+            return true;
+        });
+
         headerView.findViewById(R.id.buttonAvaliacao).setOnClickListener(v ->
                 startActivity(new Intent(MainActivity.this, AvaliacaoActivity.class))
         );
-
 
         ViewPager2 imageCarousel = findViewById(R.id.imageCarousel);
         List<Integer> images = Arrays.asList(
@@ -111,10 +119,12 @@ public class MainActivity extends AppCompatActivity {
                     currentItem = 0;
                 }
                 imageCarousel.setCurrentItem(currentItem++, true);
-                imageCarousel.postDelayed(this, 3000);
+                //imageCarousel.postDelayed(this, 3000);
             }
         }, 3000);
     }
+
+
 
     private void loadUserName() {
         String savedUserName = sharedPreferences.getString("userName", null);
