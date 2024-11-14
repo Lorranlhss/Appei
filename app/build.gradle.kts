@@ -10,11 +10,15 @@ android {
     defaultConfig {
         applicationId = "com.biomaamazonia.appei"
         minSdk = 23
-        targetSdk = 34
+        targetSdk = 32
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        lintOptions {
+            disable("ExpiredTargetSdkVersion")
+        }
     }
 
     buildTypes {

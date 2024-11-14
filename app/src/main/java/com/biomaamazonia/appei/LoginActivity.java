@@ -255,7 +255,10 @@ public class LoginActivity extends AppCompatActivity {
             visitorsRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    int visitorCount = snapshot.exists() ? snapshot.child("cont").getValue(Integer.class) : 0;
+                    Integer visitorCount = snapshot.exists() ? snapshot.child("cont").getValue(Integer.class) : null;
+                    if (visitorCount == null) {
+                        visitorCount = 0;
+                    }
                     visitorsRef.child("cont").setValue(visitorCount + 1);
 
                     // Gerar ID único e salvar
@@ -265,13 +268,14 @@ public class LoginActivity extends AppCompatActivity {
                     // Registrar data e hora do primeiro acesso
                     String currentDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
                     visitorsRef.child("dispositivos").child(uniqueID).child("primeiroAcesso").setValue(currentDateTime);
-
-                    // Registrar também o primeiro acesso como último acesso inicialmente
                     visitorsRef.child("dispositivos").child(uniqueID).child("ultimoAcesso").setValue(currentDateTime);
 
                     // Marcar o dispositivo como registrado
-                    sharedPreferences.edit().putBoolean(PREF_VISITOR_REGISTERED, true).apply();
-                    sharedPreferences.edit().putString("visitorID", uniqueID).apply();
+                    sharedPreferences.edit()
+                            .putBoolean(PREF_VISITOR_REGISTERED, true)
+                            .putString("visitorID", uniqueID)
+                            .apply();
+
                     navigateToMainActivity();
                 }
 
